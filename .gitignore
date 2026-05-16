@@ -1,0 +1,47 @@
+# Build artifacts
+build/
+openMVG_build/
+
+# OpenMVG source (third-party, has its own repo)
+openMVG/
+
+# Reconstruction project data (large binary files)
+openmvg_project/
+sfm_output/
+
+# Test images
+test_data/
+
+# Zeisl third-party binaries/VS artifacts
+src/zeisl/covEstimate/bin/
+src/zeisl/covEstimate/lib/
+src/zeisl/covEstimate/lib_debug/
+src/zeisl/covEstimate/covEstimate.VC.db
+src/zeisl/covEstimate/*.sln
+src/zeisl/covEstimate/*.vcxproj
+src/zeisl/covEstimate/*.vcxproj.filters
+src/zeisl/covEstimate/*.vcxproj.user
+src/zeisl/covEstimate/third party/
+
+# Zeisl test data and VS artifacts
+src/zeisl/Data/
+src/zeisl/openMVG_output_correspondence.txt
+src/zeisl/readme_openMVG_output_files.docx
+**/.vs/
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+*.sln
+*.suo
+*.db
+*.db-shm
+*.db-wal
+*.ipch
+
+# Bundled third-party OpenCV headers in zeisl
+src/zeisl/covEstimate/include/opencv2/
+src/zeisl/covEstimate/include/third party/
+
+# Python cache
+__pycache__/
+*.pyc
