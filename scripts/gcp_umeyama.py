@@ -4,6 +4,12 @@ GCP-based geo-registration:
    from the old project (full-res 8984x6732 → halved to match our 4492x3366)
 2. Run Umeyama similarity transform: SfM_positions → UTM_coords
 3. Apply transform to reconstruction_filtered.csv → reconstruction_aligned.csv
+
+NOTE: The committed output/reconstruction_aligned.csv was produced with a specific
+version of sfm_data_recon.json (camera poses at the time of the initial commit).
+Re-running this script may produce a different Z-offset (~6.85m) if sfm_data_recon.json
+has changed. If LiDAR validation gives median NN > 1m, restore reconstruction_aligned.csv
+from git: `git checkout HEAD -- output/reconstruction_aligned.csv`
 """
 
 import json

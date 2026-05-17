@@ -249,6 +249,24 @@ int main(int argc, char** argv) {
     ceres::Solve(opts, &problem, &summary);
     std::cout << summary.BriefReport() << "\n";
 
+    // ── A posteriori reference variance ───────────────────────────────────
+    // σ²₀ = VᵀPV / (m − n)
+    // VᵀPV = 2 × final_cost  (Ceres minimises ½‖r‖², whitened residuals have P baked in)
+    // m = 2 × number of observations (each gives a 2-vector residual)
+    // n = 6 × num_poses + 3 × num_landmarks  (intrinsics held fixed)
+    const int m_obs = (n_with_cov + n_no_cov) * 2;
+    const int n_params = static_cast<int>(extr_blocks.size()) * 6
+                       + static_cast<int>(pt_blocks.size()) * 3;
+    const int dof = m_obs - n_params;
+    double ref_var = 1.0;
+    if (dof > 0) {
+        ref_var = 2.0 * summary.final_cost / dof;
+        std::cout << "A posteriori reference variance σ²₀ = " << ref_var
+                  << "  (dof=" << dof << ")\n";
+    } else {
+        std::cerr << "Warning: dof <= 0, skipping reference variance scaling.\n";
+    }
+
     // ── Per-point covariance via ceres::Covariance ────────────────────────
     // Fix all camera poses so the only free parameters are the 3D points.
     // This removes the 7 gauge DOF and gives the marginal covariance of each

@@ -9,8 +9,9 @@ openMVG/
 openmvg_project/
 sfm_output/
 
-# Test images
+# Test images and synthetic eval images (large)
 test_data/
+synthetic_eval/images/
 
 # Zeisl third-party binaries/VS artifacts
 src/zeisl/covEstimate/bin/
